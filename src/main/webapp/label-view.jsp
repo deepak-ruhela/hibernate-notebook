@@ -1,29 +1,27 @@
+<%@page import="java.util.Set"%>
+<%@page import="org.hibernate.id.IntegralDataTypeHolder"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
-<!doctype html>
-<%@page import="java.util.List"%>
-<%@page import="org.hibernate.Query"%>
-<%@page import="com.helper.FactoryProvider"%>
-<%@page import="org.hibernate.Session"%>
-<%@page import="com.entities.*"%>
-<html lang="en">
+<%@page import="com.helper.*,org.hibernate.*,com.entities.*"%>
+<!DOCTYPE html>
+<html>
 <head>
-<!-- Required meta tags -->
-<meta charset="utf-8">
-<meta name="viewport"
-	content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
-
-<title>Note Taker : Home page</title>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
 <%@include file="all_js_css.jsp"%>
-
-
 </head>
 <body>
-
 	<div class="container">
 		<%@include file="navbar.jsp"%>
+		<h1>Label View</h1>
 		<br>
+
+		<%
+		int id = Integer.parseInt(request.getParameter("id").trim());
+		Session s = FactoryProvider.getFactory().openSession();
+		Label label = (Label) s.get(Label.class, id);
+		Set<Note> notes = label.getNotes();
+		%>
 
 
 		<div class="row">
@@ -31,10 +29,7 @@
 			<div class="col-12">
 
 				<%
-				Session s = FactoryProvider.getFactory().openSession();
-				Query q = s.createQuery("from Note");
-				List<Note> list = q.list();
-				for (Note note : list) {
+				for (Note note : notes) {
 				%>
 
 				<div class="card mt-3">
@@ -49,14 +44,13 @@
 							<b class="text-primary"><%=note.getAddedDate()%></b>
 						</p>
 						<div class="container text-center mt-2">
-							<a href="DeleteServlet?note_id=<%=note.getId()%>"
-								class="btn btn-danger">Delete</a> <a
+							<a href=NoteDeleteServlet?note_id=
+								<%=note.getId()%>" class="btn btn-danger">Delete</a> <a
 								href="note-edit.jsp?note_id=<%=note.getId()%>"
-								class="btn btn-primary">Update</a>
+								class="btn btn-primary">Edit</a>
 						</div>
 					</div>
 				</div>
-
 
 				<%
 				}
@@ -70,9 +64,5 @@
 		</div>
 
 	</div>
-
-
-
-
 </body>
 </html>

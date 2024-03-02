@@ -1,15 +1,21 @@
 package com.entities;
 
 import java.util.Date;
+import java.util.HashSet;
 import java.util.Random;
+import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "notes")
+@Table(name = "note")
 public class Note {
 	@Id
 	private int id;
@@ -17,6 +23,28 @@ public class Note {
 	@Column(length = 1500)
 	private String content;
 	private Date addedDate;
+
+	@ManyToOne
+	@JoinColumn(name = "notebook_id")
+	private Notebook notebook;
+
+	@ManyToMany
+	@JoinTable(name = "note_label", joinColumns = @JoinColumn(name = "note_id"), inverseJoinColumns = @JoinColumn(name = "label_id"))
+	private Set<Label> labels = new HashSet<>();
+
+	public Note() {
+		super();
+	}
+
+	public Note(int id, String title, String content, Date addedDate, Notebook notebook, Set<Label> labels) {
+		super();
+		this.id = id;
+		this.title = title;
+		this.content = content;
+		this.addedDate = addedDate;
+		this.notebook = notebook;
+		this.labels = labels;
+	}
 
 	public int getId() {
 		return id;
@@ -50,19 +78,20 @@ public class Note {
 		this.addedDate = addedDate;
 	}
 
-	public Note(String title, String content, Date addedDate) {
-		super();
-		this.id = new Random().nextInt(100000);
-		this.title = title;
-		this.content = content;
-		this.addedDate = addedDate;
+	public Notebook getNotebook() {
+		return notebook;
 	}
 
-	public Note() {
-		super();
-		// TODO Auto-generated constructor stub
+	public void setNotebook(Notebook notebook) {
+		this.notebook = notebook;
 	}
-	
-	
+
+	public Set<Label> getLabels() {
+		return labels;
+	}
+
+	public void setLabels(Set<Label> labels) {
+		this.labels = labels;
+	}
 
 }

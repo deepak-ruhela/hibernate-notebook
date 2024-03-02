@@ -5,6 +5,7 @@ import java.io.PrintWriter;
 import java.util.Date;
 
 import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -14,11 +15,13 @@ import org.hibernate.Transaction;
 
 import com.entities.Note;
 import com.helper.FactoryProvider;
+import com.helper.Util;
 
-public class SaveNoteServlet extends HttpServlet {
+@WebServlet("/NoteAddServlet")
+public class NoteAddServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-	public SaveNoteServlet() {
+	public NoteAddServlet() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
@@ -29,7 +32,13 @@ public class SaveNoteServlet extends HttpServlet {
 			// title,content fetch
 			String title = request.getParameter("title");
 			String content = request.getParameter("content");
-			Note note = new Note(title, content, new Date());
+//			Note note = new Note(title, content, new Date());
+			Note note = new Note();
+			note.setId(Util.getNoteMaxId());
+			note.setTitle(title);
+			note.setContent(content);
+			note.setAddedDate(new Date());
+
 //			System.out.println(note.getId() + " : " + note.getTitle());
 			// hibernate:save()
 			Session s = FactoryProvider.getFactory().openSession();
@@ -40,7 +49,7 @@ public class SaveNoteServlet extends HttpServlet {
 			response.setContentType("text/html");
 			PrintWriter out = response.getWriter();
 			out.println("<h1 style='text-align:center;'>Note is added successfully</h1>");
-			out.println("<h1 style='text-align:center;'><a href='all_notes.jsp'>View all notes</a></h1>");
+			out.println("<h1 style='text-align:center;'><a href='note-all.jsp'>View all notes</a></h1>");
 
 		} catch (Exception e) {
 			e.printStackTrace();

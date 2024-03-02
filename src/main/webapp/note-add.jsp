@@ -18,7 +18,7 @@
 
 		<!-- this is add form  -->
 
-		<form action="SaveNoteServlet" method="post">
+		<form action="NoteAddServlet" method="post">
 
 			<div class="form-group">
 				<label for="title">Note title</label> 
@@ -51,6 +51,7 @@
 			<div class="container text-center">
 
 				<button type="submit" class="btn btn-primary">Add</button>
+				<a class="btn btn-secondary " href="note-all.jsp">Cancel</a>
 			</div>
 
 		</form>

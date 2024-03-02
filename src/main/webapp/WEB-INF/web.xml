@@ -1,37 +1,54 @@
-<!DOCTYPE web-app PUBLIC
- "-//Sun Microsystems, Inc.//DTD Web Application 2.3//EN"
- "http://java.sun.com/dtd/web-app_2_3.dtd" >
-
-<web-app>
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:web="http://xmlns.jcp.org/xml/ns/javaee" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd">
   <display-name>Archetype Created Web Application</display-name>
   <servlet>
-  	<servlet-name>SaveNoteServlet</servlet-name>
-  	<display-name>SaveNoteServlet</display-name>
-  	<description></description>
-  	<servlet-class>com.servlets.SaveNoteServlet</servlet-class>
-  </servlet>
-  <servlet>
-  	<servlet-name>DeleteServlet</servlet-name>
-  	<display-name>DeleteServlet</display-name>
-  	<description></description>
-  	<servlet-class>com.servlets.DeleteServlet</servlet-class>
-  </servlet>
-  <servlet>
-  	<servlet-name>UpdateServlet</servlet-name>
-  	<display-name>UpdateServlet</display-name>
-  	<description></description>
-  	<servlet-class>com.servlets.UpdateServlet</servlet-class>
+    <description></description>
+    <display-name>LabelAddServlet</display-name>
+    <servlet-name>LabelAddServlet</servlet-name>
+    <servlet-class>com.servlets.LabelAddServlet</servlet-class>
   </servlet>
   <servlet-mapping>
-  	<servlet-name>SaveNoteServlet</servlet-name>
-  	<url-pattern>/SaveNoteServlet</url-pattern>
+    <servlet-name>LabelAddServlet</servlet-name>
+    <url-pattern>/LabelAddServlet</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>LabelEditServlet</display-name>
+    <servlet-name>LabelEditServlet</servlet-name>
+    <servlet-class>com.servlets.LabelEditServlet</servlet-class>
+  </servlet>
   <servlet-mapping>
-  	<servlet-name>DeleteServlet</servlet-name>
-  	<url-pattern>/DeleteServlet</url-pattern>
+    <servlet-name>LabelEditServlet</servlet-name>
+    <url-pattern>/LabelEditServlet</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>LabelDeleteServlet</display-name>
+    <servlet-name>LabelDeleteServlet</servlet-name>
+    <servlet-class>com.servlets.LabelDeleteServlet</servlet-class>
+  </servlet>
   <servlet-mapping>
-  	<servlet-name>UpdateServlet</servlet-name>
-  	<url-pattern>/UpdateServlet</url-pattern>
+    <servlet-name>LabelDeleteServlet</servlet-name>
+    <url-pattern>/LabelDeleteServlet</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>NoteToNotebookServlet</display-name>
+    <servlet-name>NoteToNotebookServlet</servlet-name>
+    <servlet-class>com.servlets.NoteToNotebookServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>NoteToNotebookServlet</servlet-name>
+    <url-pattern>/NoteToNotebookServlet</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>NoteToLabelServlet</display-name>
+    <servlet-name>NoteToLabelServlet</servlet-name>
+    <servlet-class>com.servlets.NoteToLabelServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>NoteToLabelServlet</servlet-name>
+    <url-pattern>/NoteToLabelServlet</url-pattern>
   </servlet-mapping>
 </web-app>

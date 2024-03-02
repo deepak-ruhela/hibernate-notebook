@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.Date;
 
 import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -14,10 +15,11 @@ import org.hibernate.Transaction;
 import com.entities.Note;
 import com.helper.FactoryProvider;
 
-public class UpdateServlet extends HttpServlet {
+@WebServlet("/NoteEditServlet")
+public class NoteEditServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-	public UpdateServlet() {
+	public NoteEditServlet() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
@@ -43,7 +45,7 @@ public class UpdateServlet extends HttpServlet {
 			tx.commit();
 			s.close();
 
-			response.sendRedirect("all_notes.jsp");
+			response.sendRedirect("note-all.jsp");
 
 		} catch (Exception e) {
 			// TODO: handle exception

@@ -2,6 +2,7 @@ package com.servlets;
 
 import java.io.IOException;
 import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -12,10 +13,11 @@ import org.hibernate.Transaction;
 import com.entities.Note;
 import com.helper.FactoryProvider;
 
-public class DeleteServlet extends HttpServlet {
+@WebServlet("/NoteDeleteServlet")
+public class NoteDeleteServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-	public DeleteServlet() {
+	public NoteDeleteServlet() {
 		super();
 
 	}
@@ -31,7 +33,7 @@ public class DeleteServlet extends HttpServlet {
 			s.delete(note);
 			tx.commit();
 			s.close();
-			response.sendRedirect("all_notes.jsp");
+			response.sendRedirect("note-all.jsp");
 
 		} catch (Exception e) {
 			// TODO: handle exception
