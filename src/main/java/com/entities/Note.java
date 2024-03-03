@@ -25,7 +25,9 @@ public class Note {
 	private Date addedDate;
 
 	@ManyToOne
-	@JoinColumn(name = "notebook_id")
+//	@JoinColumn(name = "notebook_id")
+	@JoinTable(name = "note_notebook", joinColumns = @JoinColumn(name = "note_id"), inverseJoinColumns = @JoinColumn(name = "notebook_id"))
+
 	private Notebook notebook;
 
 	@ManyToMany

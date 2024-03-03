@@ -94,6 +94,34 @@ public class Util {
 
 	}
 
+	public static int getCoverMaxId() {
+		SessionFactory sessionFactory = FactoryProvider.getFactory();
+		Session session = sessionFactory.openSession();
+		Transaction tx = null;
+		int maxId = 0;
+
+		try {
+			tx = session.beginTransaction();
+			Query query = session.createQuery("select max(id) from Cover");
+
+			Number result = (Number) query.uniqueResult();
+			if (result != null) {
+				maxId = result.intValue();
+			}
+//			maxId = (int) query.uniqueResult();
+
+			tx.commit();
+		} catch (HibernateException e) {
+			if (tx != null)
+				tx.rollback();
+			e.printStackTrace();
+		} finally {
+			session.close();
+		}
+		return maxId + 1;
+
+	}
+
 	public static int convertStringToInt(String str) {
 		return Integer.parseInt(str);
 	}

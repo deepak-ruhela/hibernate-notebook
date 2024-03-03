@@ -20,6 +20,8 @@
 			</li>
 			<li class="nav-item"><a class="nav-link" href="label-all.jsp">Labels</a>
 			</li>
+			<li class="nav-item"><a class="nav-link" href="cover-all.jsp">Covers</a>
+			</li>
 		</ul>
 	</div>
 </nav>

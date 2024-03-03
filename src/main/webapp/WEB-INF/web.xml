@@ -51,4 +51,34 @@
     <servlet-name>NoteToLabelServlet</servlet-name>
     <url-pattern>/NoteToLabelServlet</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>CoverEditServlet</display-name>
+    <servlet-name>CoverEditServlet</servlet-name>
+    <servlet-class>com.servlets.CoverEditServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>CoverEditServlet</servlet-name>
+    <url-pattern>/CoverEditServlet</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>CoverAddServlet</display-name>
+    <servlet-name>CoverAddServlet</servlet-name>
+    <servlet-class>com.servlets.CoverAddServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>CoverAddServlet</servlet-name>
+    <url-pattern>/CoverAddServlet</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>NotebookToCoverServlet</display-name>
+    <servlet-name>NotebookToCoverServlet</servlet-name>
+    <servlet-class>com.servlets.NotebookToCoverServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>NotebookToCoverServlet</servlet-name>
+    <url-pattern>/NotebookToCoverServlet</url-pattern>
+  </servlet-mapping>
 </web-app>

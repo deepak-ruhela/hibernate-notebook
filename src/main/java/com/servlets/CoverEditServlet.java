@@ -6,27 +6,24 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.Date;
 
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
-import com.entities.Note;
-import com.entities.Notebook;
+import com.entities.Cover;
 import com.helper.FactoryProvider;
 import com.helper.Util;
 
 /**
- * Servlet implementation class NotebookUpdateServlet
+ * Servlet implementation class CoverEditServlet
  */
-@WebServlet("/NotebookEditServlet")
-public class NotebookEditServlet extends HttpServlet {
+public class CoverEditServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */
-	public NotebookEditServlet() {
+	public CoverEditServlet() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
@@ -47,25 +44,26 @@ public class NotebookEditServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		// TODO Auto-generated method stub
-//		doGet(request, response);
 		try {
 			int id = Util.convertStringToInt(request.getParameter("id"));
 
 			String name = request.getParameter("name");
+			String description = request.getParameter("description");
 
 			Session s = FactoryProvider.getFactory().openSession();
 			Transaction tx = s.beginTransaction();
 
-			Notebook notebook = s.get(Notebook.class, id);
+			Cover cover = s.get(Cover.class, id);
 
-			notebook.setName(name);
-			s.saveOrUpdate(notebook);
+			cover.setName(name);
+			cover.setDescription(description);
+
+			s.saveOrUpdate(cover);
 
 			tx.commit();
 			s.close();
 
-			response.sendRedirect("notebook-all.jsp");
+			response.sendRedirect("cover-all.jsp");
 
 		} catch (Exception e) {
 			// TODO: handle exception

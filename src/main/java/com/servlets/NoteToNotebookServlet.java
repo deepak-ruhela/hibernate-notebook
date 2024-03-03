@@ -75,7 +75,7 @@ public class NoteToNotebookServlet extends HttpServlet {
 			response.setContentType("text/html");
 			PrintWriter out = response.getWriter();
 			out.println("<h1 style='text-align:center;'>Note is added to notebook</h1>");
-			out.println("<h1 style='text-align:center;'><a href='notebook-view.jsp?id="+notebookId+"'>View all notebooks</a></h1>");
+			out.println("<h1 style='text-align:center;'><a href='notebook-view.jsp?id="+notebookId+"'>View all notes in the notebook</a></h1>");
 
 		} catch (Exception e) {
 			e.printStackTrace();

@@ -6,27 +6,25 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.Date;
+import java.io.PrintWriter;
 
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
-import com.entities.Note;
-import com.entities.Notebook;
+import com.entities.Cover;
 import com.helper.FactoryProvider;
 import com.helper.Util;
 
 /**
- * Servlet implementation class NotebookUpdateServlet
+ * Servlet implementation class CoverAddServlet
  */
-@WebServlet("/NotebookEditServlet")
-public class NotebookEditServlet extends HttpServlet {
+public class CoverAddServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */
-	public NotebookEditServlet() {
+	public CoverAddServlet() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
@@ -48,27 +46,30 @@ public class NotebookEditServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub
-//		doGet(request, response);
+		doGet(request, response);
 		try {
-			int id = Util.convertStringToInt(request.getParameter("id"));
-
+			// title,content fetch
 			String name = request.getParameter("name");
+			String description = request.getParameter("description");
+			System.out.println(name + " =========================== " + description);
+			Cover cover = new Cover();
+			cover.setId(Util.getCoverMaxId());
+			cover.setName(name);
+			cover.setDescription(description);
 
+			System.out.println(cover.getId() + " : " + cover.getName());
+			// hibernate:save()
 			Session s = FactoryProvider.getFactory().openSession();
 			Transaction tx = s.beginTransaction();
-
-			Notebook notebook = s.get(Notebook.class, id);
-
-			notebook.setName(name);
-			s.saveOrUpdate(notebook);
-
+			s.save(cover);
 			tx.commit();
 			s.close();
-
-			response.sendRedirect("notebook-all.jsp");
+			response.setContentType("text/html");
+			PrintWriter out = response.getWriter();
+			out.println("<h1 style='text-align:center;'>Cover is added successfully</h1>");
+			out.println("<h1 style='text-align:center;'><a href='cover-all.jsp'>View all covers</a></h1>");
 
 		} catch (Exception e) {
-			// TODO: handle exception
 			e.printStackTrace();
 		}
 	}

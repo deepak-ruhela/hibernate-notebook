@@ -1,3 +1,5 @@
+<%@page import="java.util.List"%>
+<%@page import="com.dao.CoverDao"%>
 <%@page import="com.dao.NotebookDao"%>
 <%@page import="org.hibernate.id.IntegralDataTypeHolder"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
@@ -17,7 +19,7 @@
 		<br>
 
 		<%
-		int id = Integer.parseInt(request.getParameter("id").trim());
+		int id = Integer.parseInt(request.getParameter("id"));
 		NotebookDao notebookDao = new NotebookDao();
 		Notebook notebook = notebookDao.getNotebookById(id);
 		%>
@@ -35,7 +37,10 @@
 
 			</div>
 
-
+			<div class="form-group">
+				<button type="button" class="btn btn-primary" data-toggle="modal"
+					data-target=".bd-example-modal-sm">Edit Cover</button>
+			</div>
 			<div class="container text-center">
 
 				<button type="submit" class="btn btn-success">Save your
@@ -46,6 +51,34 @@
 		</form>
 
 
+	</div>
+
+	<div class="modal fade bd-example-modal-sm" tabindex="-1" role="dialog"
+		aria-labelledby="mySmallModalLabel" aria-hidden="true">
+		<div class="modal-dialog modal-sm">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="exampleModalLongTitle">Available
+						Covers</h5>
+				</div>
+				<div class="modal-body py-3 px-3">
+					<%
+					CoverDao coverDao = new CoverDao();
+					List<Cover> cList = coverDao.getAllCovers();
+					for (Cover cover : cList) {
+					%>
+					<p>
+						<a
+							href="NotebookToCoverServlet?notebookId=<%=notebook.getId()%>&coverId=<%=cover.getId()%>"
+							class="btn btn-primary"><%=cover.getName()%></a>
+
+					</p>
+					<%
+					}
+					%>
+				</div>
+			</div>
+		</div>
 	</div>
 </body>
 </html>
